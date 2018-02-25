@@ -29,27 +29,27 @@ class Scoreboard
         return teams_hash
     end
 
-    def determine_winners(games_hashes)
+    def determine_winners(games_array)
         results_array = []
         counter = 0
-        ((games_hashes.length)/2).times do
-            if games_hashes[counter][1] > games_hashes[(counter +1)][1]
-                games_hashes[counter][1] = "w"
-                games_hashes[(counter +1)][1] = "l"
-                results_array << [games_hashes[counter][0], games_hashes[counter][1] ]
-                results_array << [games_hashes[(counter + 1)][0], games_hashes[(counter + 1)][1]]
+        ((games_array.length)/2).times do
+            if games_array[counter][1] > games_array[(counter +1)][1]
+                games_array[counter][1] = "w"
+                games_array[(counter +1)][1] = "l"
+                results_array << [games_array[counter][0], games_array[counter][1] ]
+                results_array << [games_array[(counter + 1)][0], games_array[(counter + 1)][1]]
                 counter += 2
-            elsif games_hashes[(counter +1)][1] > games_hashes[counter][1]
-                games_hashes[counter][1] = "l"
-                games_hashes[(counter +1)][1] = "w"
-                results_array << [games_hashes[counter][0], games_hashes[counter][1] ]
-                results_array << [games_hashes[(counter + 1)][0], games_hashes[(counter + 1)][1]]
+            elsif games_array[(counter +1)][1] > games_array[counter][1]
+                games_array[counter][1] = "l"
+                games_array[(counter +1)][1] = "w"
+                results_array << [games_array[counter][0], games_array[counter][1] ]
+                results_array << [games_array[(counter + 1)][0], games_array[(counter + 1)][1]]
                 counter += 2
             else
-                games_hashes[counter][1] = "t"
-                games_hashes[(counter +1)][1] = "t"
-                results_array << [games_hashes[counter][0], games_hashes[counter][1] ]
-                results_array << [games_hashes[(counter + 1)][0], games_hashes[(counter + 1)][1]]
+                games_array[counter][1] = "t"
+                games_array[(counter +1)][1] = "t"
+                results_array << [games_array[counter][0], games_array[counter][1] ]
+                results_array << [games_array[(counter + 1)][0], games_array[(counter + 1)][1]]
                 counter += 2
             end
         end
@@ -103,10 +103,3 @@ class Scoreboard
     end
 
 end
-
-s = Scoreboard.new(["Lions 3, Snakes 3", "Tarantulas 1, FC Awesome 0", "Lions 1, FC Awesome 1", "Tarantulas 3, Snakes 1", "Lions 4, Grouches 0"])
-g_arrays = s.create_games_arrays
-t_hashes = s.create_team_hashes
-results = s.determine_winners(g_arrays)
-final = s.update_teams_hash(t_hashes, results)
-p output = s.output_prep(final)
